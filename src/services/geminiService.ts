@@ -2,7 +2,7 @@ import { GoogleGenAI, GenerateContentResponse, Chat } from "@google/genai";
 import { ChatMessage } from "../types";
 
 // Initialize the client.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.API_KEY });
 
 const ACADEMIC_INSTRUCTION = `
 You are a rigorous historian and legal scholar specializing in the history of the Hawaiian Kingdom, International Law, and United States Constitutional Law.
