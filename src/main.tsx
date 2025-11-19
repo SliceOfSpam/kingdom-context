@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import './index.css'; // This is the new line that fixes the "Blank/Unstyled" look
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
