@@ -2,7 +2,6 @@ import { GoogleGenAI, GenerateContentResponse, Chat } from "@google/genai";
 import { ChatMessage } from "../types";
 
 // Initialize the client.
-// The API key must be provided via the environment variable API_KEY.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const ACADEMIC_INSTRUCTION = `
@@ -55,12 +54,11 @@ Tone: Direct, engaging, critical, and "receipt-based." Use the "Ya but..." phras
 export const generateHistoricalAnalysis = async (topic: string): Promise<string> => {
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview', // Using Pro for deeper reasoning on complex legal history
+      model: 'gemini-2.5-flash',
       contents: `Provide a critical historical and legal analysis on the following topic regarding Hawaiian Sovereignty: "${topic}". 
       Focus on the legal discrepancies and historical facts that challenge the legitimacy of US jurisdiction.`,
       config: {
         systemInstruction: ACADEMIC_INSTRUCTION,
-        thinkingConfig: { thinkingBudget: 2048 } // Enable thinking for complex legal arguments
       }
     });
     return response.text || "Analysis could not be generated at this time.";
@@ -73,7 +71,7 @@ export const generateHistoricalAnalysis = async (topic: string): Promise<string>
 export const generateCitations = async (topic: string, analysisContext: string): Promise<string> => {
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview',
+      model: 'gemini-2.5-flash',
       contents: `You are a research assistant. Reference the following historical analysis on "${topic}" and provide a list of academic citations, primary source documents, legal cases, or treaties that validate these claims.
 
       Analysis Context:
